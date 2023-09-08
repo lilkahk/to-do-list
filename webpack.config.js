@@ -16,6 +16,14 @@ module.exports = {
           'css-loader',   // Translates CSS into CommonJS
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
 };

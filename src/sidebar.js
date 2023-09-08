@@ -63,7 +63,7 @@ export default function createSidebar() {
     projectsTitle.classList.add('projects-title');
     // Title Text
     const projectsTitleText = document.createElement('h4');
-    projectsTitleText.textContent = 'Projects';
+    projectsTitleText.textContent = 'Projects/Events';
     projectsTitle.appendChild(projectsTitleText);
     // Title Icon
     const addProject = document.createElement('button');
