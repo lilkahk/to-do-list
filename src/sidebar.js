@@ -1,4 +1,4 @@
-import './style.css'
+import './sidebar.css'
 import chooseTextColor from './chooseTextColor';
 
 export default function createSidebar() {

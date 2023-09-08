@@ -1,4 +1,4 @@
-import './style.css'
+import './content.css'
 
 export default function createContent () {
     // Define
