@@ -1,5 +1,137 @@
+
+
 .content {
     grid-area: 2 / 2 / -1 / -1;
     display: grid;
     grid-template-columns: 1fr 6fr 2fr;
+}
+
+.content-side {
+    color: var(--non-important-color, grey);
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 28px;
+}
+
+.content-side p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.open-modal {
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    gap: 24px;
+    position: relative;
+    top: 25%;
+}
+
+.open-modal div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.open-modal-one {
+    left: 40%;
+}
+
+.open-modal-two {
+    left: 39%;
+}
+
+.open-modal-three {
+    left: 37%;
+}
+
+.open-modal-four {
+    left: 36%;
+}
+
+.open-modal-five {
+    left: 35%;
+}
+
+.tasks-projects {
+    display: flex;
+    gap: 16px;
+}
+
+.project-icon {
+    display: none;
+}
+
+.project-icon:not(:checked) + .projects-icon-label {
+    filter: brightness(0.8); /* Reset the filter for unchecked labels */
+}
+
+.project-icon:checked + .projects-icon-label {
+    box-shadow: 2px 2px 1px 1px rgb(86, 85, 85);
+}
+
+.projects-icon-label {
+    padding: 8px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background 0.1s; 
+}
+
+.tasks-modal-inputs {
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 2px solid rgb(168, 166, 166);
+    outline: none;
+}
+
+.task-modal-stars {
+    height: 24px;
+    width: 24px;
+    fill: gold;
+}
+
+#due-date-input {
+    border: none;
+}
+
+.confirm-container-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.confirm-container-modal p, .confirm-container-modal input{
+    font-size: 0.8rem;
+}
+
+.confirm-task-modal {
+    color: green;
+}
+
+.discard-task-modal {
+    color: red;
+}
+
+#notes-input {
+    padding: 2px 6px;
+}
+
+.notes-input-one {
+    max-width: 250px !important; 
+}
+
+.notes-input-two {
+    max-width: 282px !important;
+}
+
+.notes-input-three {
+    max-width: 314px !important;
+}
+
+.notes-input-four {
+    max-width: 346px !important;
+}
+
+.notes-input-five {
+    max-width: 378px !important;
 }

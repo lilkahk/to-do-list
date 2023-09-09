@@ -143,6 +143,9 @@ export default function createSidebar() {
 
     projects.appendChild(projectsTitle);
 
+    // Add all project
+    projects.appendChild(createAllProject());
+
     // Load stored projects
     if ((localStorage.getItem(`Project 0`))) {
         let i = 0;
@@ -227,5 +230,23 @@ function createProject(data, count) {
     })
     projectContainer.appendChild(removeBtn);
     
+    return projectContainer;
+}
+
+function createAllProject() {
+    const projectContainer = document.createElement('div'),
+        project = document.createElement('div');
+
+    // Change Container
+    projectContainer.classList.add('project-container');
+    projectContainer.id = `all-project`;
+
+    // Change Project
+    project.classList.add('project');
+    project.textContent = 'All Tasks';
+    project.style.backgroundColor = 'lightgray';
+    project.style.color = 'black'
+    projectContainer.appendChild(project);
+
     return projectContainer;
 }

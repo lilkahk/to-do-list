@@ -18,5 +18,5 @@ export default function chooseTextColor(background_color) {
     const backgroundLuminance = calculateLuminance(background_color);
 
     // Determine the text color based on luminance
-    return backgroundLuminance > 0.5 ? 'black' : 'white';
+    return backgroundLuminance > 0.6 ? 'black' : 'white';
 }

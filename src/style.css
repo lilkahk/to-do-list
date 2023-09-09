@@ -5,6 +5,7 @@
     --bck-txt-col: black;
     --sidebar-bck-color: rgb(248, 244, 244);
     --sidebar-hover-color: rgb(236, 233, 233);
+    --non-important-color: grey;
 }
 
 * {
