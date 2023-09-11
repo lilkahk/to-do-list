@@ -23,10 +23,9 @@ function createSide() {
     const addTaskText = document.createElement('p');
     addTaskText.textContent = 'Add Task +';
 
-    const modal = addTaskModal();
-    contentSide.appendChild(modal);
-
     addTaskText.addEventListener('click', function() {
+        const modal = addTaskModal();
+        contentSide.appendChild(modal);
         modal.classList.add('open-modal');
         modal.showModal()
     })

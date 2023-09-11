@@ -7,7 +7,7 @@ export default function addTaskModal() {
     // Add a title
     const titleDiv = document.createElement('div');
     const title = document.createElement('h3');
-    title.textContent = 'Create a Task'
+    title.textContent = 'Create a Task';
     titleDiv.appendChild(title);
     modal.appendChild(titleDiv);
 
@@ -358,33 +358,10 @@ export default function addTaskModal() {
             }
             inputArr.push(notesInput.value);
             // Create Task object
-            const newTask = createTask(inputArr);
-            displayNewTask(newTask);
-            //
+            createTask(inputArr);
 
-
-
-
-
-
-
-
-
-
-
-        //
-        
-
-        // Remove inputs
-        taskNameInput.value = '';
-        dueDateInput.value = '';
-        anytimeInput.checked = false;
-        notesInput.value = '';
-        // Close modal
-        modal.classList.remove('open-modal');
-        modal.close();
+            modal.remove();
         } else {
-
             return;
         }
     })
@@ -393,14 +370,7 @@ export default function addTaskModal() {
     discardTaskText.textContent = 'Discard task';
     discardTaskText.classList.add('discard-task-modal');
     discardTaskText.addEventListener('click', function() {
-        // Remove inputs
-        taskNameInput.value = '';
-        dueDateInput.value = '';
-        anytimeInput.checked = false;
-        notesInput.value = '';
-        // Close modal
-        modal.classList.remove('open-modal');
-        modal.close();
+        modal.remove();
     })
 
     confirmContainer.appendChild(confirmTaskText);

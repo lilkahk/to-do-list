@@ -3,11 +3,6 @@ import chooseTextColor from './chooseTextColor';
 import { isToday, parseISO, differenceInDays, startOfDay } from 'date-fns';
 
 export default function displayNewTask(obj) {
-    console.log(obj);
-    let today = false,
-        upcoming = false,
-        far = false,
-        anytime = false;
     // Get main div
     const mainDiv = document.querySelector('.content-main');
 
@@ -37,31 +32,24 @@ export default function displayNewTask(obj) {
     const startOfToday = startOfDay(new Date());
     const taskDate = document.createElement('h4');
     if (obj.due === 'Anytime') {
-        anytime = true;
     } else {
         const dueDate = parseISO(obj.due);
         const diffDays = differenceInDays(dueDate, startOfToday);
         if (isToday(dueDate)) {
             taskDate.textContent = 'Today';
-            today = true;
         } else if (diffDays === 1) {
             taskDate.textContent = 'In 1 Day';
-            upcoming = true;
         } else if (diffDays < 7) {
             taskDate.textContent = `In ${diffDays} Days`;
-            upcoming = true;
         } else if (diffDays < 28) {
             const weeksFromNow = Math.floor(diffDays / 7);
             taskDate.textContent = `In ${weeksFromNow} Weeks`;
-            far = true;
         } else if (diffDays < 365) {
             const monthsFromNow = Math.floor(diffDays / 28);
             taskDate.textContent = `In ${monthsFromNow} Months`;
-            far = true;
         } else {
             const yearsFromNow = Math.floor(diffDays / 365);
             taskDate.textContent = `In ${yearsFromNow} Years`;
-            far = true;
         }
         taskDiv.appendChild(taskDate);
     }

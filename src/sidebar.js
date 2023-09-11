@@ -1,5 +1,6 @@
 import './sidebar.css'
 import chooseTextColor from './chooseTextColor';
+import displayNewTask from './displayNewTask';
 
 export default function createSidebar() {
     // Creation
@@ -129,6 +130,7 @@ export default function createSidebar() {
                 name: name,
                 color: color,
                 id: projCount,
+                tasks: []
             };
 
             const newProj = createProject(newProjectData, projCount);
@@ -157,9 +159,9 @@ export default function createSidebar() {
 
     projects.appendChild(projectsTitle);
 
-    // Add all project
+    // Add all project if it does not exist and display it
     projects.appendChild(createAllProject());
-
+    
     // Load stored projects
     if ((localStorage.getItem(`Project 0`))) {
         let i = 0;
@@ -243,6 +245,20 @@ function createProject(data, count) {
         localStorage.setItem('projCount', Math.max(currentCount - 1, 0));
     })
     projectContainer.appendChild(removeBtn);
+
+    // Display tasks
+    project.addEventListener('click', function() {
+        const tasks = JSON.parse(localStorage.getItem(`Project ${count}`)).tasks;
+        const displayArea = document.querySelector('.content-main');
+        displayArea.innerHTML = '';
+        const areaTitle = document.createElement('h1');
+        areaTitle.style.textAlign = 'center';
+        areaTitle.textContent = `${data.name}`;
+        displayArea.appendChild(areaTitle);
+        for (let i = 0; i < tasks.length; i++) {
+            displayNewTask(tasks[i]);
+        }
+    })
     
     return projectContainer;
 }
@@ -262,8 +278,29 @@ function createAllProject() {
     project.style.color = 'black'
     projectContainer.appendChild(project);
 
-    localStorage.setItem('all-project', JSON.stringify({name: 'All Tasks',
-        color: 'lightgray', id: '-1'}));
+    if (!localStorage.getItem('all-project')) {
+        const allProject = {
+            name: 'All Tasks',
+            color: 'lightgray',
+            id: -1,
+            tasks: [],
+        };
+
+        localStorage.setItem('all-project', JSON.stringify(allProject));
+    }
+
+    project.addEventListener('click', function() {
+        const tasks = (JSON.parse(localStorage.getItem('all-project'))).tasks;
+        const displayArea = document.querySelector('.content-main');
+        displayArea.innerHTML = '';
+        const areaTitle = document.createElement('h1');
+        areaTitle.style.textAlign = 'center';
+        areaTitle.textContent = 'All Tasks';
+        displayArea.appendChild(areaTitle);
+        for (let i = 0; i < tasks.length; i++) {
+            displayNewTask(tasks[i]);
+        }
+    })
 
     return projectContainer;
 }
