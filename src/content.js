@@ -40,7 +40,8 @@ function createMain() {
     const contentMain = document.createElement('div');
     contentMain.classList.add('content-main');
 
-    //
+    // Load tasks
+    
 
     return contentMain;
 }

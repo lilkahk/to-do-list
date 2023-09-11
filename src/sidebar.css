@@ -16,7 +16,7 @@
 .default-options {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
 .default-options svg {
@@ -32,6 +32,7 @@
 .default-options div:hover {
     background-color: var(--sidebar-hover-color);
     cursor: pointer;
+    font-weight: bold;
 }
 
 .new-project-div {
@@ -62,6 +63,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-bottom: 4px;
 }
 
 #add-project {
@@ -90,10 +92,11 @@
     justify-content: space-between;
     border-radius: 20px;
     cursor: pointer;
+    margin-bottom: 1px;
 }
 
-.project-container:hover {
-    background-color: var(--sidebar-hover-color);
+.project:hover {
+    box-shadow: 1px 1px 1px 1px rgb(177, 176, 176);
 }
 
 .project {
@@ -124,7 +127,6 @@
     border: none;
     display: none;
     font-weight: bold;
-    background-color: var(--sidebar-hover-color);
 }
 
 .remove-button:hover {

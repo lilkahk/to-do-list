@@ -39,11 +39,25 @@ export default function createSidebar() {
     defaultOptions.appendChild(upcoming);
 
 
+    const farAway = document.createElement('div');
+    // Add the icon to it
+    const farAwayIcon = document.createElement('svg');
+    farAwayIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-month</title><path d="M9,10V12H7V10H9M13,10V12H11V10H13M17,10V12H15V10H17M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H6V1H8V3H16V1H18V3H19M19,19V8H5V19H19M9,14V16H7V14H9M13,14V16H11V14H13M17,14V16H15V14H17Z" /></svg>';
+    farAwayIcon.style.fill = 'darkorange';
+    farAway.appendChild(farAwayIcon);
+    // Text
+    const farAwayText = document.createElement('p');
+    farAwayText.textContent = 'Far Away';
+    farAway.appendChild(farAwayText);
+    // Add to container
+    defaultOptions.appendChild(farAway);
+
+
     const anytime = document.createElement('div');
     // Add the icon to it
     const anytimeIcon = document.createElement('svg');
     anytimeIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>bookshelf</title><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>'
-    anytimeIcon.style.fill = 'rgb(11, 89, 11)';
+    anytimeIcon.style.fill = 'green';
     anytime.appendChild(anytimeIcon);
     // Text
     const anytimeText = document.createElement('p');
@@ -247,6 +261,9 @@ function createAllProject() {
     project.style.backgroundColor = 'lightgray';
     project.style.color = 'black'
     projectContainer.appendChild(project);
+
+    localStorage.setItem('all-project', JSON.stringify({name: 'All Tasks',
+        color: 'lightgray', id: '-1'}));
 
     return projectContainer;
 }

@@ -1,0 +1,56 @@
+.task-display-main {
+    padding: 4px 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-display-main:hover {
+    box-shadow: 1px 1px 1px 1px grey;
+}
+
+.side-div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.star-container-notes {
+    display: flex;
+    gap: 4px;
+}
+
+.difficulty-div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.finished-task-div, .delete-task-div {
+    border-radius: 16px;
+    padding: 2px 6px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.finished-task-div:hover, .delete-task-div:hover {
+    box-shadow: 1px 1px 1px 1px rgb(167, 167, 167);
+    font-size: bold;
+}
+
+.finished-task-div {
+    color: rgb(1, 105, 1);
+    background-color: rgb(184, 230, 202);
+    margin: 12px 0px 1px;
+}
+
+.delete-task-div {
+    color: rgb(181, 3, 3);
+    background-color: rgb(221, 167, 167);
+}
+
+.notes-notes {
+    font-size: 0.8rem;
+}

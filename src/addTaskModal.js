@@ -1,4 +1,6 @@
 import createTask from "./createTask";
+import displayNewTask from "./displayNewTask";
+import { sub } from 'date-fns';
 
 export default function addTaskModal() {
     const modal = document.createElement('dialog');
@@ -33,6 +35,7 @@ export default function addTaskModal() {
         containerLabel.classList.add('projects-icon-label');
         containerLabel.style.backgroundColor = style.backgroundColor;
         containerLabel.style.color = style.color;
+        containerLabel.id = projectsArr[i].parentElement.id;
 
         projects.appendChild(container);
         projects.appendChild(containerLabel);
@@ -235,6 +238,9 @@ export default function addTaskModal() {
           dueDateInput = document.createElement('input'),
           dueDateLabel = document.createElement('label');
 
+
+    const yesterday = sub(new Date(), {days: 1});    
+    dueDateInput.setAttribute('min', yesterday.toISOString().split('T')[0]);
     dueDateInput.setAttribute('type', 'date');
     dueDateInput.id = 'due-date-input';
     dueDateLabel.setAttribute('for', dueDateInput.id);
@@ -330,19 +336,43 @@ export default function addTaskModal() {
 
         // Close modal
         if (requirements) {
-        // Add inputs to arr
-        inputArr.push(selectedRadio.value);
-        inputArr.push(taskNameInput.value);
-        inputArr.push(taskTimeInput.value);
-        inputArr.push(difficultyInput.value);
-        if (dateInput) {
-            inputArr.push(dateInput);
-        } else {
-            inputArr.push('Anytime');
-        }
-        inputArr.push(notesInput.value);
-        // Create Task object
-        console.log(createTask(inputArr));
+            // Get project id
+            const selectedLabel = selectedRadio.nextSibling;
+            const hyphenatedId = selectedLabel.id;
+
+            // Add inputs to arr
+            inputArr.push(selectedRadio.value);
+            // Project id
+            if (hyphenatedId === 'all-project') {
+                inputArr.push(hyphenatedId);
+            } else {
+                inputArr.push(hyphenatedId.replace('-', ' '));
+            }
+            inputArr.push(taskNameInput.value);
+            inputArr.push(taskTimeInput.value);
+            inputArr.push(difficultyInput.value);
+            if (dateInput) {
+                inputArr.push(dateInput);
+            } else {
+                inputArr.push('Anytime');
+            }
+            inputArr.push(notesInput.value);
+            // Create Task object
+            const newTask = createTask(inputArr);
+            displayNewTask(newTask);
+            //
+
+
+
+
+
+
+
+
+
+
+
+        //
         
 
         // Remove inputs

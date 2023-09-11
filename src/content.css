@@ -135,3 +135,18 @@
 .notes-input-five {
     max-width: 378px !important;
 }
+
+
+.content-main {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.content-notes {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
