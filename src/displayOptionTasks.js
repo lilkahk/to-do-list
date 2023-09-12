@@ -16,13 +16,13 @@ export default function displayOptionTasks(optionName) {
     } else if (optionName === 'Upcoming') {
         for (let i = 0; i < tasks.length; i++) {
             if (isBefore(parseISO(tasks[i].due), today)) continue;
-            const diffDays = differenceInDays(today, parseISO(tasks[i].due));
+            const diffDays = differenceInDays(parseISO(tasks[i].due), today);
             if (diffDays <= 3) optionArr.push(tasks[i]);
         }
     } else if (optionName === 'Far Away') {
         for (let i = 0; i < tasks.length; i++) {
             if (isBefore(parseISO(tasks[i].due), today)) continue;
-            const diffDays = differenceInDays(today, parseISO(tasks[i].due));
+            const diffDays = differenceInDays(parseISO(tasks[i].due), today);
             if (diffDays > 3) optionArr.push(tasks[i]);
         }
     } else {
