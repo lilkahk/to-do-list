@@ -1,6 +1,6 @@
 import createTask from "./createTask";
 import displayNewTask from "./displayNewTask";
-import { sub } from 'date-fns';
+import { startOfDay } from 'date-fns';
 import displayTasks from "./displayTasks";
 
 export default function addTaskModal() {
@@ -240,8 +240,8 @@ export default function addTaskModal() {
           dueDateLabel = document.createElement('label');
 
 
-    const yesterday = sub(new Date(), {days: 1});    
-    dueDateInput.setAttribute('min', yesterday.toISOString().split('T')[0]);
+    const startOfToday = startOfDay(new Date);   
+    dueDateInput.setAttribute('min', startOfToday.toISOString().split('T')[0]);
     dueDateInput.setAttribute('type', 'date');
     dueDateInput.id = 'due-date-input';
     dueDateLabel.setAttribute('for', dueDateInput.id);

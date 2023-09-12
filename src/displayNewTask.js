@@ -37,7 +37,7 @@ export default function displayNewTask(obj) {
     } else {
         const dueDate = parseISO(obj.due);
         const diffDays = differenceInDays(dueDate, startOfToday);
-        const before = isBefore(startOfToday, dueDate);
+        const before = isBefore(dueDate, startOfToday);
         if (isToday(dueDate)) {
             taskDate.textContent = 'Today';
         } else if (diffDays === 1) {
@@ -54,24 +54,27 @@ export default function displayNewTask(obj) {
             }
         } else if (diffDays < 28) {
             const weeksFromNow = Math.floor(diffDays / 7);
+            const withOrWithoutS = weeksFromNow === 1 ? 'Week' : 'Weeks';
             if (before) {
-                taskDate.textContent = `Due ${weeksFromNow} Weeks Ago`;
+                taskDate.textContent = `Due ${weeksFromNow} ${withOrWithoutS} Ago`;
             } else {
-                taskDate.textContent = `In ${weeksFromNow} Weeks`;
+                taskDate.textContent = `In ${weeksFromNow} ${withOrWithoutS}`;
             }
         } else if (diffDays < 365) {
             const monthsFromNow = Math.floor(diffDays / 28);
+            const withOrWithoutS = monthsFromNow === 1 ? 'Month' : 'Months';
             if (before) {
-                taskDate.textContent = `Due ${monthsFromNow} Months Ago`;
+                taskDate.textContent = `Due ${monthsFromNow} ${withOrWithoutS} Ago`;
             } else {
-                taskDate.textContent = `In ${monthsFromNow} Months`;
+                taskDate.textContent = `In ${monthsFromNow} ${withOrWithoutS}`;
             }
         } else {
             const yearsFromNow = Math.floor(diffDays / 365);
+            const withOrWithoutS = yearsFromNow === 1 ? 'Year' : 'Years';
             if (before) {
-                taskDate.textContent = `Due ${yearsFromNow} Years Ago`;
+                taskDate.textContent = `Due ${yearsFromNow} ${withOrWithoutS} Ago`;
             } else {
-                taskDate.textContent = `In ${yearsFromNow} Years`;
+                taskDate.textContent = `In ${yearsFromNow} ${withOrWithoutS}`;
             }
         }
         taskDiv.appendChild(taskDate);
@@ -126,7 +129,8 @@ export default function displayNewTask(obj) {
         sideDiv.appendChild(difficultyDiv);
 
         // Notes
-        const notesDiv = document.createElement('div'),
+        if (obj.notes !== '') {
+            const notesDiv = document.createElement('div'),
             notesTitle = document.createElement('h4'),
             notesNotes = document.createElement('p');
         
@@ -138,7 +142,8 @@ export default function displayNewTask(obj) {
         notesDiv.appendChild(notesNotes);
 
         sideDiv.appendChild(notesDiv);
-
+        }
+    
         // Finished
         const finsihedDiv = document.createElement('div');
         finsihedDiv.classList.add('finished-task-div');

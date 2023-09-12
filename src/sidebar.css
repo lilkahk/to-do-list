@@ -30,9 +30,12 @@
 }
 
 .default-options div:hover {
-    background-color: var(--sidebar-hover-color);
     cursor: pointer;
     font-weight: bold;
+}
+
+.default-options div:hover svg {
+    width: 1.8rem;
 }
 
 .new-project-div {

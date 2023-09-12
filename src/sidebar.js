@@ -1,7 +1,7 @@
 import './sidebar.css'
 import chooseTextColor from './chooseTextColor';
-import displayNewTask from './displayNewTask';
 import displayTasks from './displayTasks';
+import createOption from './createOption';
 
 export default function createSidebar() {
     // Creation
@@ -12,61 +12,30 @@ export default function createSidebar() {
     const defaultOptions = document.createElement('div');
     defaultOptions.classList.add('default-options');
 
-
-    const today = document.createElement('div');
-    // Add the icon to it
+    // Today
     const todayIcon = document.createElement('svg');
     todayIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>star</title><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" /></svg>'
     todayIcon.style.fill = 'gold';
-    today.appendChild(todayIcon);
-    // Text
-    const todayText = document.createElement('p');
-    todayText.textContent = 'Today';
-    today.appendChild(todayText);
-    // Add to container
-    defaultOptions.appendChild(today);
+    defaultOptions.appendChild(createOption('Today', todayIcon));
 
-
-    const upcoming = document.createElement('div');
-    // Add the icon to it
+    // Upcoming
     const upcomingIcon = document.createElement('svg');
     upcomingIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-clock</title><path d="M15,13H16.5V15.82L18.94,17.23L18.19,18.53L15,16.69V13M19,8H5V19H9.67C9.24,18.09 9,17.07 9,16A7,7 0 0,1 16,9C17.07,9 18.09,9.24 19,9.67V8M5,21C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H6V1H8V3H16V1H18V3H19A2,2 0 0,1 21,5V11.1C22.24,12.36 23,14.09 23,16A7,7 0 0,1 16,23C14.09,23 12.36,22.24 11.1,21H5M16,11.15A4.85,4.85 0 0,0 11.15,16C11.15,18.68 13.32,20.85 16,20.85A4.85,4.85 0 0,0 20.85,16C20.85,13.32 18.68,11.15 16,11.15Z" /></svg>'
     upcomingIcon.style.fill = "rgb(110, 7, 7)";
-    upcoming.appendChild(upcomingIcon);
-    // Text
-    const upcomingText = document.createElement('p');
-    upcomingText.textContent = 'Upcoming';
-    upcoming.appendChild(upcomingText);
-    // Add to container
-    defaultOptions.appendChild(upcoming);
+    defaultOptions.appendChild(createOption('Upcoming', upcomingIcon));
 
-
-    const farAway = document.createElement('div');
-    // Add the icon to it
+    // Far Away
     const farAwayIcon = document.createElement('svg');
     farAwayIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-month</title><path d="M9,10V12H7V10H9M13,10V12H11V10H13M17,10V12H15V10H17M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H6V1H8V3H16V1H18V3H19M19,19V8H5V19H19M9,14V16H7V14H9M13,14V16H11V14H13M17,14V16H15V14H17Z" /></svg>';
-    farAwayIcon.style.fill = 'darkorange';
-    farAway.appendChild(farAwayIcon);
-    // Text
-    const farAwayText = document.createElement('p');
-    farAwayText.textContent = 'Far Away';
-    farAway.appendChild(farAwayText);
-    // Add to container
-    defaultOptions.appendChild(farAway);
+    farAwayIcon.style.fill = 'green';
+    defaultOptions.appendChild(createOption('Far Away', farAwayIcon));
 
-
-    const anytime = document.createElement('div');
-    // Add the icon to it
+    // Anytime
     const anytimeIcon = document.createElement('svg');
     anytimeIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>bookshelf</title><path d="M9 3V18H12V3H9M12 5L16 18L19 17L15 4L12 5M5 5V18H8V5H5M3 19V21H21V19H3Z" /></svg>'
-    anytimeIcon.style.fill = 'green';
-    anytime.appendChild(anytimeIcon);
-    // Text
-    const anytimeText = document.createElement('p');
-    anytimeText.textContent = 'Anytime';
-    anytime.appendChild(anytimeText);
-    // Add to container
-    defaultOptions.appendChild(anytime);
+    anytimeIcon.style.fill = 'black';
+    defaultOptions.appendChild(createOption('Anytime', anytimeIcon));
+
 
     sideBar.appendChild(defaultOptions);
 

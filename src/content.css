@@ -56,6 +56,9 @@
 .tasks-projects {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap;
+    width: 250px;
+    flex: 1;
 }
 
 .project-icon {
