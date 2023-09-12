@@ -2,6 +2,7 @@ import './style.css'
 import createSidebar from './sidebar';
 import createHeader from './header';
 import createContent from './content';
+import displayTasks from './displayTasks';
 
 export default function pageLoad() {
     // Get Body
@@ -13,4 +14,5 @@ export default function pageLoad() {
     body.appendChild(createHeader());
     // Content
     body.appendChild(createContent());
+    displayTasks('all-project', 'All Tasks');
 }

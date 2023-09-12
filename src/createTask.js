@@ -1,6 +1,8 @@
+import displayTasks from "./displayTasks";
 import reorganizeTasks from "./reorganizeTasks";
 
-let numTasks = 0;
+let numTasks = parseInt(localStorage.getItem('numTasks'), 10) || 0;
+
 // createTask(arr) creates a task object
 // requirements: arr[0] is the project,
 //               arr[1] is the id of the project
@@ -10,8 +12,6 @@ let numTasks = 0;
 //               arr[5] is the due date
 //               arr[6] is the notes
 export default function createTask(arr) {
-    console.log(arr);
-    numTasks++;
     const taskObj = {
         project: arr[0],
         'project id': arr[1],
@@ -22,6 +22,8 @@ export default function createTask(arr) {
         notes: arr[6],
         id: numTasks
     };
+    numTasks++;
+    localStorage.setItem('numTasks', numTasks.toString());
     // Get project from localStorage, add task to project.task array, and sort it
     const storedProj = JSON.parse(localStorage.getItem(taskObj['project id']));
     (storedProj.tasks).push(taskObj);
@@ -31,13 +33,10 @@ export default function createTask(arr) {
     // Add task to All Tasks project if different
     if (taskObj['project id'] !== 'all-project') {
         const allProject = JSON.parse(localStorage.getItem('all-project'));
-        console.log(allProject.tasks);
         (allProject.tasks).push(taskObj);
-        console.log(allProject.tasks);
         reorganizeTasks(allProject.tasks);
-        console.log(allProject.tasks);
         localStorage.setItem('all-project', JSON.stringify(allProject));
     }
-
+    
     return;
 }

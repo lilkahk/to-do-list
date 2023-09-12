@@ -8,7 +8,10 @@ export default function createContent () {
     content.classList.add('content');
 
     content.appendChild(createSide());
-    content.appendChild(createMain());
+
+    const contentMain = document.createElement('div');
+    contentMain.classList.add('content-main');
+    content.appendChild(contentMain);
 
     const contentNotes = document.createElement('div');
     contentNotes.classList.add('content-notes');
@@ -33,14 +36,4 @@ function createSide() {
     contentSide.appendChild(addTaskText);
 
     return contentSide;
-}
-
-function createMain() {
-    const contentMain = document.createElement('div');
-    contentMain.classList.add('content-main');
-
-    // Load tasks
-    
-
-    return contentMain;
 }

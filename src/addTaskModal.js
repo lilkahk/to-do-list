@@ -1,6 +1,7 @@
 import createTask from "./createTask";
 import displayNewTask from "./displayNewTask";
 import { sub } from 'date-fns';
+import displayTasks from "./displayTasks";
 
 export default function addTaskModal() {
     const modal = document.createElement('dialog');
@@ -359,6 +360,9 @@ export default function addTaskModal() {
             inputArr.push(notesInput.value);
             // Create Task object
             createTask(inputArr);
+            const mainDiv = document.querySelector('.main-div-title');
+            const displayName = mainDiv.textContent;
+            displayTasks(mainDiv.id, displayName);
 
             modal.remove();
         } else {

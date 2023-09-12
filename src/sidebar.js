@@ -1,6 +1,7 @@
 import './sidebar.css'
 import chooseTextColor from './chooseTextColor';
 import displayNewTask from './displayNewTask';
+import displayTasks from './displayTasks';
 
 export default function createSidebar() {
     // Creation
@@ -248,17 +249,8 @@ function createProject(data, count) {
 
     // Display tasks
     project.addEventListener('click', function() {
-        const tasks = JSON.parse(localStorage.getItem(`Project ${count}`)).tasks;
-        const displayArea = document.querySelector('.content-main');
-        displayArea.innerHTML = '';
-        const areaTitle = document.createElement('h1');
-        areaTitle.style.textAlign = 'center';
-        areaTitle.textContent = `${data.name}`;
-        displayArea.appendChild(areaTitle);
-        for (let i = 0; i < tasks.length; i++) {
-            displayNewTask(tasks[i]);
-        }
-    })
+        displayTasks(`Project ${count}`, data.name);
+    });
     
     return projectContainer;
 }
@@ -290,17 +282,8 @@ function createAllProject() {
     }
 
     project.addEventListener('click', function() {
-        const tasks = (JSON.parse(localStorage.getItem('all-project'))).tasks;
-        const displayArea = document.querySelector('.content-main');
-        displayArea.innerHTML = '';
-        const areaTitle = document.createElement('h1');
-        areaTitle.style.textAlign = 'center';
-        areaTitle.textContent = 'All Tasks';
-        displayArea.appendChild(areaTitle);
-        for (let i = 0; i < tasks.length; i++) {
-            displayNewTask(tasks[i]);
-        }
-    })
+        displayTasks('all-project', 'All Tasks');
+    }); 
 
     return projectContainer;
 }

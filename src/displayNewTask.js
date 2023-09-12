@@ -1,6 +1,8 @@
 import './displayNewTask.css'
 import chooseTextColor from './chooseTextColor';
-import { isToday, parseISO, differenceInDays, startOfDay } from 'date-fns';
+import { isToday, parseISO, differenceInDays, startOfDay, isBefore } from 'date-fns';
+import displayTasks from './displayTasks';
+import addTaskModal from './addTaskModal';
 
 export default function displayNewTask(obj) {
     // Get main div
@@ -35,21 +37,42 @@ export default function displayNewTask(obj) {
     } else {
         const dueDate = parseISO(obj.due);
         const diffDays = differenceInDays(dueDate, startOfToday);
+        const before = isBefore(startOfToday, dueDate);
         if (isToday(dueDate)) {
             taskDate.textContent = 'Today';
         } else if (diffDays === 1) {
-            taskDate.textContent = 'In 1 Day';
+            if (before) {
+                taskDate.textContent = 'Due 1 Day Ago';
+            } else {
+                taskDate.textContent = 'In 1 Day';
+            }
         } else if (diffDays < 7) {
-            taskDate.textContent = `In ${diffDays} Days`;
+            if (before) {
+                taskDate.textContent = `Due ${diffDays} Days Ago`;
+            } else {
+                taskDate.textContent = `In ${diffDays} Days`;
+            }
         } else if (diffDays < 28) {
             const weeksFromNow = Math.floor(diffDays / 7);
-            taskDate.textContent = `In ${weeksFromNow} Weeks`;
+            if (before) {
+                taskDate.textContent = `Due ${weeksFromNow} Weeks Ago`;
+            } else {
+                taskDate.textContent = `In ${weeksFromNow} Weeks`;
+            }
         } else if (diffDays < 365) {
             const monthsFromNow = Math.floor(diffDays / 28);
-            taskDate.textContent = `In ${monthsFromNow} Months`;
+            if (before) {
+                taskDate.textContent = `Due ${monthsFromNow} Months Ago`;
+            } else {
+                taskDate.textContent = `In ${monthsFromNow} Months`;
+            }
         } else {
             const yearsFromNow = Math.floor(diffDays / 365);
-            taskDate.textContent = `In ${yearsFromNow} Years`;
+            if (before) {
+                taskDate.textContent = `Due ${yearsFromNow} Years Ago`;
+            } else {
+                taskDate.textContent = `In ${yearsFromNow} Years`;
+            }
         }
         taskDiv.appendChild(taskDate);
     }
@@ -126,11 +149,42 @@ export default function displayNewTask(obj) {
         const deleteTask = document.createElement('div');
         deleteTask.classList.add('delete-task-div');
         deleteTask.textContent = 'Delete Task';
+        
+        deleteTask.addEventListener('click', function() {
+            const projId = obj['project id'];
+            const taskId = obj.id; 
+            removeTask(projId, taskId);
+            const mainDiv = document.querySelector('.main-div-title');
+            const displayName = mainDiv.textContent;
+            displayTasks(mainDiv.id, displayName);
+        })
         sideDiv.appendChild(deleteTask);
 
         side.appendChild(sideDiv);
     })
-    
 
     mainDiv.appendChild(taskDiv);
+}
+
+function removeTask(projId, taskId) {
+    // Delete from specific project
+    const storedProject = JSON.parse(localStorage.getItem(projId));
+    const tasks = storedProject.tasks;
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === taskId) {
+            tasks.splice(i, 1);
+        }
+    }
+    localStorage.setItem(projId, JSON.stringify(storedProject));
+
+    if (projId !== 'all-project') {
+        const allProject = JSON.parse(localStorage.getItem('all-project'));
+        const allTasks = allProject.tasks;
+        for (let i = 0; i < allTasks.length; i++) {
+            if (allTasks[i].id === taskId) {
+                allTasks.splice(i, 1);
+            }
+        }
+        localStorage.setItem('all-project', JSON.stringify(allProject));
+    }
 }
