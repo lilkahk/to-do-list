@@ -172,9 +172,13 @@ export default function displayNewTask(obj) {
         deleteTask.textContent = 'Delete Task';
         
         deleteTask.addEventListener('click', function() {
+            // Remove sideNote display
+            sideDiv.remove();
+            // Remove from storage
             const projId = obj['project id'];
             const taskId = obj.id; 
             removeTask(projId, taskId);
+            // Refresh
             const mainDiv = document.querySelector('.main-div-title');
             const displayName = mainDiv.textContent;
             displayTasks(mainDiv.id, displayName);
