@@ -163,6 +163,16 @@ export default function displayNewTask(obj) {
         const time = estimatedTime.getAttribute('value');
         finsihedDiv.addEventListener('click', function() {
             reward(difficulty, time);
+            // Remove sideNote display
+            sideDiv.remove();
+            // Remove from storage
+            const projId = obj['project id'];
+            const taskId = obj.id; 
+            removeTask(projId, taskId);
+            // Refresh
+            const mainDiv = document.querySelector('.main-div-title');
+            const displayName = mainDiv.textContent;
+            displayTasks(mainDiv.id, displayName);
         })
         sideDiv.appendChild(finsihedDiv);
 
