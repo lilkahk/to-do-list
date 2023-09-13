@@ -9,8 +9,10 @@ export default function reorganizeTasks(arr) {
 
         if (aDate === 'Anytime' && bDate !== 'Anytime') {
             return 1;
-        } else if (aDate === 'Anytime' || bDate === 'Anytime') {
+        } else if (bDate === 'Anytime') {
             return -1;
+        } else if (aDate === 'Anytime') {
+            return 1;
         } else {
             return isBefore(aDate, bDate) ? -1 : 1;
         }

@@ -213,6 +213,29 @@ function createProject(data, count) {
             }
         }
         localStorage.setItem('projCount', Math.max(currentCount - 1, 0));
+
+
+        const projIdRemove = ((this.parentElement).id).replace('-', ' ');
+        // Remove tasks from 'all-project'
+        const allProject = JSON.parse(localStorage.getItem('all-project'));
+        const tasks = allProject.tasks;
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i]['project id'] === projIdRemove) {
+                tasks.splice(i, 1);
+                i--;
+            }
+        }
+        localStorage.setItem('all-project',JSON.stringify(allProject));
+
+        // Display Tasks
+        const displayProjId = (document.querySelector('.main-div-title')).id;
+        const displayName = (document.querySelector('.main-div-title')).textContent;
+        if (displayProjId !== projIdRemove) {
+            displayTasks(displayProjId, displayName);
+        } else {
+            displayTasks('all-project', 'All Tasks');
+        }
+
     })
     projectContainer.appendChild(removeBtn);
 
