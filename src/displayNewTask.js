@@ -2,7 +2,7 @@ import './displayNewTask.css'
 import chooseTextColor from './chooseTextColor';
 import { isToday, parseISO, differenceInDays, startOfDay, isBefore } from 'date-fns';
 import displayTasks from './displayTasks';
-import addTaskModal from './addTaskModal';
+import reward from './reward';
 
 export default function displayNewTask(obj) {
     // Get main div
@@ -105,7 +105,16 @@ export default function displayNewTask(obj) {
 
         // Estimated time
         const estimatedTime = document.createElement('h4');
+        const possibleTimesArr = ['< 15 min', '15-30 min', '30 min - 1h', '1h - 2h', 
+            '2h - 4h', '4h - 8h', '8h - 24h', '1 day - 2 days', '2 days - 4 days', 
+            '4 days - 1 week', '> 1 week'];
         estimatedTime.textContent = `Takes Approximately ${obj.time}`;
+        for (let i = 0; i < possibleTimesArr.length; i++) {
+            if (obj.time === possibleTimesArr[i]) {
+                estimatedTime.setAttribute('value', i);
+                break;
+            }
+        }
         sideDiv.appendChild(estimatedTime);
 
         // Difficulty
@@ -125,6 +134,7 @@ export default function displayNewTask(obj) {
             const clonedStar = star.cloneNode(true);
             starContainer.appendChild(clonedStar);
         }
+        difficultyDiv.setAttribute('difficulty', obj.difficulty);
         difficultyDiv.appendChild(starContainer);
         sideDiv.appendChild(difficultyDiv);
 
@@ -148,6 +158,12 @@ export default function displayNewTask(obj) {
         const finsihedDiv = document.createElement('div');
         finsihedDiv.classList.add('finished-task-div');
         finsihedDiv.textContent = 'Task Finished';
+        // Get difficulty and time
+        const difficulty = difficultyDiv.getAttribute('difficulty');
+        const time = estimatedTime.getAttribute('value');
+        finsihedDiv.addEventListener('click', function() {
+            reward(difficulty, time);
+        })
         sideDiv.appendChild(finsihedDiv);
 
         // Delete

@@ -70,11 +70,8 @@
     align-items: center;
 }
 
-.save, .discard {
+.save, .discard, .reset {
     font-size: 0.85rem;
-}
-
-.save:hover, .discard:hover {
     cursor: pointer;
 }
 
@@ -84,4 +81,33 @@
 
 .discard {
     color: red;
+}
+
+.reset {
+    color: orange;
+}
+
+#name-input {
+    padding: 1px 3px;
+}
+
+.name-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.confirm-reset {
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    color: orange;
+    gap: 2px;
+}
+
+.confirm-reset > div {
+    padding: 2px 6px;
+    border-radius: 12px;
+    color: white;
+    background-color: orange;
+    cursor: pointer;
 }

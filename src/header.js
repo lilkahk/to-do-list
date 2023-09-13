@@ -22,7 +22,8 @@ export default function createHeader() {
     progressContainer.classList.add('progress-container');
     // Current Level
     const currentLevel = document.createElement('h3');
-    currentLevel.textContent = 'LVL 0';
+    const lvlValue = parseInt(localStorage.getItem('level'), 10);
+    currentLevel.textContent = `LVL ${lvlValue}`;
     progressContainer.appendChild(currentLevel);
     // Bar
     const progressBar = document.createElement('div');
@@ -30,7 +31,7 @@ export default function createHeader() {
     progressContainer.appendChild(progressBar);
     // Next Level
     const nextLevel = document.createElement('h3');
-    nextLevel.textContent = 'LVL 1';
+    nextLevel.textContent = `LVL ${lvlValue + 1}`;
     progressContainer.appendChild(nextLevel);
 
     headerContainer.appendChild(progressContainer);
@@ -77,6 +78,7 @@ function createModal() {
     const inputs = document.createElement('div');
     inputs.classList.add('inputs')
     const nameInputContainer = document.createElement('div');
+    nameInputContainer.classList.add('name-input-container');
 
     const nameLabel = document.createElement('label');
     nameLabel.textContent = 'Name';
@@ -119,15 +121,45 @@ function createModal() {
     // Discard Button
     const discardChanges = document.createElement('div');
     discardChanges.classList.add('discard');
-    discardChanges.textContent = 'Discard';
+    discardChanges.textContent = 'Close';
     discardChanges.addEventListener('click', function() {
+        // Remove reset if needed
+        const reset = document.querySelector('.confirm-reset');
+        if (reset) reset.remove();
         modal.classList.remove('modal-open');
         modal.classList.add('modal-close');
         modal.close();
     })
 
+    // Reset app
+
+    const resetApp = document.createElement('div');
+    resetApp.classList.add('reset');
+    resetApp.textContent = 'Reset App';
+    resetApp.addEventListener('click', function() {
+        // Ask for confirmation
+        const confirmReset = document.createElement('div'),
+            confirmResetText = document.createElement('h5'),
+            confirmResetBtn = document.createElement('div');
+        confirmResetText.textContent = 'This change is permanent, click to confirm:';
+        confirmResetBtn.textContent = 'Reset';
+
+        confirmReset.appendChild(confirmResetText);
+        confirmReset.appendChild(confirmResetBtn);
+        confirmReset.classList.add('confirm-reset');
+
+        // If clicked
+        confirmResetBtn.addEventListener('click', function() {
+            localStorage.clear();
+            window.location.reload();
+        })
+        modal.appendChild(confirmReset);
+    })
+
     finishBtns.appendChild(saveChanges);
     finishBtns.appendChild(discardChanges);
+    finishBtns.appendChild(resetApp);
+
     modal.appendChild(finishBtns);
 
     return modal;
