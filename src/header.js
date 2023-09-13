@@ -22,6 +22,7 @@ export default function createHeader() {
     progressContainer.classList.add('progress-container');
     // Current Level
     const currentLevel = document.createElement('h3');
+    currentLevel.id = 'current-lvl';
     const lvlValue = parseInt(localStorage.getItem('level'), 10);
     currentLevel.textContent = `LVL ${lvlValue}`;
     progressContainer.appendChild(currentLevel);
@@ -31,10 +32,18 @@ export default function createHeader() {
     progressContainer.appendChild(progressBar);
     // Next Level
     const nextLevel = document.createElement('h3');
+    nextLevel.id = 'next-lvl';
     nextLevel.textContent = `LVL ${lvlValue + 1}`;
     progressContainer.appendChild(nextLevel);
 
     headerContainer.appendChild(progressContainer);
+
+    // xp
+    const xpContainer = document.createElement('div');
+    xpContainer.classList.add('bottom-xp');
+    const xp = localStorage.getItem('xp');
+    xpContainer.textContent = `${xp} / 2000 XP`;
+    headerContainer.appendChild(xpContainer);
 
     const emptyDiv = document.createElement('div');
     header.appendChild(emptyDiv);
@@ -43,7 +52,6 @@ export default function createHeader() {
     const userSettings = createUserSettings();
     userSettings.classList.add('user-settings');
     header.appendChild(userSettings);
-
 
     return header;
 }

@@ -25,7 +25,21 @@
     width: 600px;
     height: 40px;
     border: 2px solid white;
-    border-radius: 24px;
+    border-radius: 1.5em;
+    position: relative;
+}
+
+.progress::before {
+    content: '';
+    position: absolute;
+    display: flex;
+    left: 0.5em;
+    top: 0.4em;
+    bottom: 0.4em;
+    width: calc(var(--width, 0) * 1%);
+    max-width: calc((100% - 1em));
+    background-color: white;
+    border-radius: 1.5em;
 }
 
 .user-settings {
