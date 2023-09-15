@@ -36,7 +36,8 @@ export default function displayNewTask(obj) {
     if (obj.due === 'Anytime') {
     } else {
         const dueDate = parseISO(obj.due);
-        const diffDays = differenceInDays(dueDate, startOfToday);
+        const negDiff = differenceInDays(dueDate, startOfToday);
+        const diffDays = negDiff > 0 ? negDiff : -negDiff;
         const before = isBefore(dueDate, startOfToday);
         if (isToday(dueDate)) {
             taskDate.textContent = 'Today';
