@@ -3,6 +3,7 @@ import chooseTextColor from './chooseTextColor';
 import { isToday, parseISO, differenceInDays, startOfDay, isBefore } from 'date-fns';
 import displayTasks from './displayTasks';
 import reward from './reward';
+import displayOptionTasks from './displayOptionTasks';
 
 export default function displayNewTask(obj) {
     // Get main div
@@ -192,7 +193,13 @@ export default function displayNewTask(obj) {
             // Refresh
             const mainDiv = document.querySelector('.main-div-title');
             const displayName = mainDiv.textContent;
+            // If in an option tab
+            if (displayName === 'Today' || displayName === 'Upcoming' || 
+                displayName === 'Far Away' || displayName === 'Anytime') {
+                    displayOptionTasks(displayName);
+            } else {
             displayTasks(mainDiv.id, displayName);
+            }
         })
         sideDiv.appendChild(deleteTask);
 
