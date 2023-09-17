@@ -10,6 +10,9 @@ export default function createOption(text, icon) {
     div.appendChild(divText);
 
     div.addEventListener('click', function() {
+        // Remove sidediv if applicable
+        const sideDiv = document.querySelector('.side-div');
+        if (sideDiv) sideDiv.remove();
         displayOptionTasks(text);
     })
 

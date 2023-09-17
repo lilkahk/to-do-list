@@ -241,6 +241,9 @@ function createProject(data, count) {
 
     // Display tasks
     project.addEventListener('click', function() {
+        // Remove sidediv if applicable
+        const sideDiv = document.querySelector('.side-div');
+        if (sideDiv) sideDiv.remove();
         displayTasks(`Project ${count}`, data.name);
     });
     
